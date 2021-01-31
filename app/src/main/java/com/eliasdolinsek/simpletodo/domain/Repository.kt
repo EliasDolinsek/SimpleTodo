@@ -47,4 +47,6 @@ class Repository(
 
         return mutableListOf()
     }
+
+    fun getById(id: UUID): TodoItem? = getAll().firstOrNull { it.id == id }
 }
