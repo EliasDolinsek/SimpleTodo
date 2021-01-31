@@ -6,7 +6,10 @@ import java.util.*
 
 private const val TODO_ITEMS_KEY = "todoItems"
 
-class Repository(private val sharedPreferences: SharedPreferences, private val gson: Gson) {
+class Repository(
+    private val sharedPreferences: SharedPreferences,
+    private val gson: Gson = Gson()
+) {
 
     fun add(todoItem: TodoItem) {
         val todoItems = getAll()
