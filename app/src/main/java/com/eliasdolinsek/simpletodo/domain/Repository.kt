@@ -2,6 +2,7 @@ package com.eliasdolinsek.simpletodo.domain
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.util.*
 
 private const val TODO_ITEMS_KEY = "todoItems"
@@ -41,8 +42,7 @@ class Repository(
     fun getAll(): MutableList<TodoItem> {
         val todoItemsStr = sharedPreferences.getString(TODO_ITEMS_KEY, null)
         todoItemsStr?.apply {
-            return gson.fromJson(todoItemsStr, List::class.java)
-                .toMutableList() as MutableList<TodoItem>
+            return gson.fromJson(todoItemsStr, Array<TodoItem>::class.java).toMutableList()
         }
 
         return mutableListOf()
