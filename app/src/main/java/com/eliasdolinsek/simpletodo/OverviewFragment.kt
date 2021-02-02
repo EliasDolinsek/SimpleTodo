@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eliasdolinsek.simpletodo.databinding.FragmentOverviewBinding
@@ -42,7 +43,9 @@ class OverviewFragment : Fragment() {
     }
 
     private fun onEditTodoItem(id: UUID) {
-
+        val action =
+            OverviewFragmentDirections.actionOverviewFragmentToEditorFragment(id.toString())
+        findNavController().navigate(action)
     }
 
     private fun onCheckTodoItem(id: UUID) {

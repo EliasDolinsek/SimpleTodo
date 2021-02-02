@@ -17,7 +17,12 @@
     </fragment>
     <fragment
         android:id="@+id/editorFragment"
-        android:name="com.eliasdolinsek.simpletodo.EditorFragment"
+        android:name="com.eliasdolinsek.simpletodo.editor.EditorFragment"
         android:label="fragment_editor"
-        tools:layout="@layout/fragment_editor" />
+        tools:layout="@layout/fragment_editor" >
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>
