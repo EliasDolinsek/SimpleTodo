@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,46 +12,52 @@
         <variable
             name="name"
             type="String" />
+
+        <variable
+            name="deadline"
+            type="String" />
+
+        <variable
+            name="description"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout_todo_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp">
 
         <CheckBox
-            android:id="@+id/cbDone"
+            android:id="@+id/cb_todo_done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:checked="@{done}"
             android:text="@{name}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btnEdit"
+        <TextView
+            android:id="@+id/tv_todo_deadline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_edit"
-            android:contentDescription="Edit item" />
+            android:layout_marginStart="32dp"
+            android:text="@{deadline}"
+            app:layout_constraintStart_toStartOf="@+id/cb_todo_done"
+            app:layout_constraintTop_toBottomOf="@+id/cb_todo_done" />
 
         <TextView
-            android:id="@+id/txtDeadline"
+            android:id="@+id/tv_todo_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@+id/cbDone"
-            app:layout_constraintTop_toBottomOf="@+id/cbDone" />
+            android:layout_marginTop="8dp"
+            android:text="@{description}"
+            app:layout_constraintStart_toStartOf="@+id/tv_todo_deadline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_todo_deadline" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

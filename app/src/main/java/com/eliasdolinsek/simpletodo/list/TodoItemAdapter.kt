@@ -1,7 +1,7 @@
 package com.eliasdolinsek.simpletodo.list
 
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eliasdolinsek.simpletodo.databinding.TodoItemBinding
@@ -24,8 +24,8 @@ class TodoItemAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.binding.cbDone.setOnClickListener { onDoneChanged(item.id) }
-        holder.binding.btnEdit.setOnClickListener { onEdit(item.id) }
+        holder.binding.cbTodoDone.setOnClickListener { onDoneChanged(item.id) }
+        holder.binding.constraintLayoutTodoItem.setOnClickListener { onEdit(item.id) }
         holder.bind(item)
     }
 
@@ -37,7 +37,13 @@ class ViewHolder(val binding: TodoItemBinding) : RecyclerView.ViewHolder(binding
         binding.apply {
             binding.name = todoItem.name
             binding.done = todoItem.done
-            binding.txtDeadline.text = todoItem.deadline.toString()
+            binding.deadline = todoItem.deadline.toString()
+
+            if (todoItem.description.isNotEmpty()) {
+                binding.description = todoItem.description
+            } else {
+                binding.tvTodoDescription.visibility = View.GONE
+            }
         }
     }
 }
