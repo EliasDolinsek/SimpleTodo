@@ -3,23 +3,29 @@ package com.eliasdolinsek.simpletodo.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.eliasdolinsek.simpletodo.domain.Repository
 import com.eliasdolinsek.simpletodo.domain.TodoItem
 import java.util.*
 
-class TodoItemViewModel(private val repository: Repository) : ViewModel() {
-
-    private val todoItems by lazy {
-        MutableLiveData<List<TodoItem>>().also {
-            loadTodoItems()
-        }
+class OverviewViewModelFactory(private val repository: Repository) : ViewModelProvider.Factory {
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return OverviewViewModel(repository) as T
     }
+}
+
+class OverviewViewModel(private val repository: Repository) : ViewModel() {
+
+    private val todoItems = MutableLiveData<List<TodoItem>>()
 
     private fun loadTodoItems() {
         todoItems.value = repository.getAll()
     }
 
-    fun getAllTodoItems(): LiveData<List<TodoItem>> = todoItems
+    fun getAllTodoItems(): LiveData<List<TodoItem>> = todoItems.also {
+        loadTodoItems()
+    }
 
     fun updateDone(id: UUID) {
         val todoItem = repository.getById(id)

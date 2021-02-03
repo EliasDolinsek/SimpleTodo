@@ -7,24 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.eliasdolinsek.simpletodo.TodoItemApplication
 import com.eliasdolinsek.simpletodo.databinding.FragmentEditorBinding
 import com.eliasdolinsek.simpletodo.viewmodel.EditorViewModel
 import com.eliasdolinsek.simpletodo.viewmodel.EditorViewModelFactory
-import com.eliasdolinsek.simpletodo.viewmodel.TodoItemViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.util.*
 
 class EditorFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private val args: EditorFragmentArgs by navArgs()
-
-    private val model: TodoItemViewModel by viewModels()
     private lateinit var viewModel: EditorViewModel
-
     private lateinit var adapter: ArrayAdapter<String>
 
     override fun onCreateView(
@@ -36,12 +31,11 @@ class EditorFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         val factory =
             EditorViewModelFactory(
-                UUID.fromString(args.id),
+                args.id?.let { UUID.fromString(args.id) },
                 (requireActivity().application as TodoItemApplication).repository
             )
 
         viewModel = ViewModelProvider(this, factory).get(EditorViewModel::class.java)
-
         viewModel.todoItem.also {
             binding.editTextEditorName.setText(it.name)
         }

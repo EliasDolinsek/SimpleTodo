@@ -9,9 +9,9 @@ import com.eliasdolinsek.simpletodo.domain.TodoItem
 import java.util.*
 
 class TodoItemAdapter(
-    var items: List<TodoItem>,
     val onDoneChanged: (id: UUID) -> Unit,
-    val onEdit: (id: UUID) -> Unit
+    val onEdit: (id: UUID) -> Unit,
+    var items: List<TodoItem> = listOf()
 ) :
     RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
