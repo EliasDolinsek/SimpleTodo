@@ -9,7 +9,7 @@
         tools:context=".editor.EditorFragment">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField"
+            android:id="@+id/text_input_layout_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,41 +22,41 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_editor_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_editor_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/ic_deadline"
-            app:layout_constraintStart_toStartOf="@+id/textField"
-            app:layout_constraintTop_toTopOf="@+id/button2" />
+            app:layout_constraintStart_toStartOf="@+id/text_input_layout_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_name" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_editor_deadline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:text="Deadline"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            app:layout_constraintStart_toEndOf="@+id/iv_editor_date"
+            app:layout_constraintTop_toTopOf="@+id/iv_editor_date" />
 
-        <Button
-            android:id="@+id/button2"
+        <Spinner
+            android:id="@+id/sp_editor_date_selection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="@+id/textField"
-            app:layout_constraintTop_toBottomOf="@+id/textField" />
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/text_input_layout_name"
+            app:layout_constraintTop_toTopOf="@+id/iv_editor_date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

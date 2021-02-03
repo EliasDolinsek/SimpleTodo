@@ -26,8 +26,8 @@ class OverviewFragment : Fragment() {
         todoItemAdapter =
             TodoItemAdapter(
                 listOf(
-                    TodoItem("Test", "Test", Date(), false),
-                    TodoItem("Test", "", Date(), false)
+                    TodoItem("Test", "Test", Calendar.getInstance(), false),
+                    TodoItem("Test", "", Calendar.getInstance(), false)
                 ),
                 onEdit = ::onEditTodoItem,
                 onDoneChanged = ::onCheckTodoItem
