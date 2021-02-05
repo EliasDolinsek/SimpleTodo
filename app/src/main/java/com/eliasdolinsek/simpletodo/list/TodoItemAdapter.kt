@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eliasdolinsek.simpletodo.databinding.TodoItemBinding
 import com.eliasdolinsek.simpletodo.domain.TodoItem
+import com.eliasdolinsek.simpletodo.extensions.asFormattedDate
 import java.util.*
 
 class TodoItemAdapter(
@@ -35,9 +36,14 @@ class ViewHolder(val binding: TodoItemBinding) : RecyclerView.ViewHolder(binding
 
     fun bind(todoItem: TodoItem) {
         binding.apply {
-            binding.name = todoItem.name
+            binding.name = if (todoItem.name.isEmpty()) {
+                "No title"
+            } else {
+                todoItem.name
+            }
+
             binding.done = todoItem.done
-            binding.deadline = todoItem.deadline.toString()
+            binding.deadline = todoItem.deadline?.asFormattedDate() ?: "SELECT"
 
             if (todoItem.description.isNotEmpty()) {
                 binding.description = todoItem.description

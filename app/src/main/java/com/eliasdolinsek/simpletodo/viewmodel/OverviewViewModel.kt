@@ -19,13 +19,11 @@ class OverviewViewModel(private val repository: Repository) : ViewModel() {
 
     private val todoItems = MutableLiveData<List<TodoItem>>()
 
-    private fun loadTodoItems() {
+    fun loadTodoItems() {
         todoItems.value = repository.getAll()
     }
 
-    fun getAllTodoItems(): LiveData<List<TodoItem>> = todoItems.also {
-        loadTodoItems()
-    }
+    fun getAllTodoItems(): LiveData<List<TodoItem>> = todoItems.also { loadTodoItems() }
 
     fun updateDone(id: UUID) {
         val todoItem = repository.getById(id)

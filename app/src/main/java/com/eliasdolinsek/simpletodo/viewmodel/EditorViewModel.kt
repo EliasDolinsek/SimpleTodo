@@ -20,11 +20,27 @@ class EditorViewModel(private val id: UUID?, private val repository: Repository)
         id?.let { repository.getById(it) } ?: TodoItem()
     }
 
-    fun updateTodoItem(name: String, deadline: Calendar?, description: String) {
+    fun setTodoItem(
+        name: String? = null,
+        deadline: Calendar? = null,
+        description: String? = null
+    ) {
         id?.let {
             repository.update(
                 it,
-                todoItem.copy(name = name, deadline = deadline, description = description)
+                todoItem.copy(
+                    name = name ?: todoItem.name,
+                    deadline = deadline ?: todoItem.deadline,
+                    description = description ?: todoItem.description
+                )
+            )
+        } ?: run {
+            repository.add(
+                TodoItem(
+                    name = name ?: "",
+                    description = description ?: "",
+                    deadline = deadline
+                )
             )
         }
     }

@@ -2,7 +2,6 @@ package com.eliasdolinsek.simpletodo.domain
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import java.util.*
 
 private const val TODO_ITEMS_KEY = "todoItems"
@@ -24,11 +23,11 @@ class Repository(
         write(todoItems)
     }
 
-    fun update(id: UUID, update: TodoItem) {
+    fun update(id: UUID, todoItem: TodoItem) {
         val todoItems = getAll()
         todoItems.indexOfFirst { it.id == id }.let {
             todoItems.removeAt(it)
-            todoItems.add(it, update.copy(id = id))
+            todoItems.add(it, todoItem.copy(id = id))
         }
 
         write(todoItems)

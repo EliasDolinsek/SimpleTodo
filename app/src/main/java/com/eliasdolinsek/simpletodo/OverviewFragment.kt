@@ -28,7 +28,9 @@ class OverviewFragment : Fragment() {
 
         val factory =
             OverviewViewModelFactory((requireActivity().application as TodoItemApplication).repository)
+
         val viewModel = ViewModelProvider(this, factory).get(OverviewViewModel::class.java)
+        viewModel.loadTodoItems()
 
         todoItemAdapter =
             TodoItemAdapter(

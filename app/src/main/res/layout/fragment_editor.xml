@@ -28,15 +28,37 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout_description"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_editor_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="12dp"
+                tools:layout_editor_absoluteY="181dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <ImageView
             android:id="@+id/iv_editor_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:src="@drawable/ic_deadline"
             app:layout_constraintStart_toStartOf="@+id/text_input_layout_name"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_name" />
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_description" />
 
         <TextView
             android:id="@+id/tv_editor_deadline"
@@ -50,13 +72,36 @@
             app:layout_constraintStart_toEndOf="@+id/iv_editor_date"
             app:layout_constraintTop_toTopOf="@+id/iv_editor_date" />
 
-        <Spinner
-            android:id="@+id/sp_editor_date_selection"
+        <Button
+            android:id="@+id/btn_editor_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
+            tools:text="1. Jan"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             app:layout_constraintEnd_toEndOf="@+id/text_input_layout_name"
-            app:layout_constraintTop_toTopOf="@+id/iv_editor_date" />
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_description" />
+
+        <Button
+            android:id="@+id/btn_editor_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="SAVE"
+            app:layout_constraintEnd_toEndOf="@+id/text_input_layout_description"
+            app:layout_constraintTop_toBottomOf="@+id/btn_editor_date" />
+
+        <Button
+            android:id="@+id/btneditor_cancel"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="CANCEL"
+            app:layout_constraintEnd_toStartOf="@+id/btn_editor_save"
+            app:layout_constraintTop_toTopOf="@+id/btn_editor_save" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
