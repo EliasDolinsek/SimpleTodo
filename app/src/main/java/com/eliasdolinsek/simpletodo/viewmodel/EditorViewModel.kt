@@ -1,5 +1,6 @@
 package com.eliasdolinsek.simpletodo.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.eliasdolinsek.simpletodo.domain.Repository
@@ -16,8 +17,16 @@ class EditorViewModelFactory(private val id: UUID?, private val repository: Repo
 
 class EditorViewModel(private val id: UUID?, private val repository: Repository) : ViewModel() {
 
+    var newTodoItem: Boolean? = null
+
     val todoItem: TodoItem by lazy {
-        id?.let { repository.getById(it) } ?: TodoItem()
+        id?.let {
+            newTodoItem = false
+            repository.getById(it)
+        } ?: run {
+            newTodoItem = true
+            TodoItem()
+        }
     }
 
     fun setTodoItem(
@@ -44,5 +53,7 @@ class EditorViewModel(private val id: UUID?, private val repository: Repository)
             )
         }
     }
+
+    fun removeTodoItem(id: UUID) = repository.remove(id)
 
 }

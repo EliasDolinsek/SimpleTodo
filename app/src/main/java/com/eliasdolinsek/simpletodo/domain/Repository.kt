@@ -41,7 +41,13 @@ class Repository(
     fun getAll(): MutableList<TodoItem> {
         val todoItemsStr = sharedPreferences.getString(TODO_ITEMS_KEY, null)
         todoItemsStr?.apply {
-            return gson.fromJson(todoItemsStr, Array<TodoItem>::class.java).toMutableList()
+            return gson.fromJson(todoItemsStr, Array<TodoItem>::class.java).toMutableList().apply {
+                sortWith(Comparator<TodoItem> { p0, p1 ->
+                    p0?.deadline?.compareTo(
+                        p1?.deadline ?: Calendar.getInstance()
+                    ) ?: 0
+                })
+            }
         }
 
         return mutableListOf()

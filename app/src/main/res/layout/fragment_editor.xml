@@ -87,13 +87,13 @@
             android:id="@+id/btn_editor_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             android:text="SAVE"
-            app:layout_constraintEnd_toEndOf="@+id/text_input_layout_description"
-            app:layout_constraintTop_toBottomOf="@+id/btn_editor_date" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/text_input_layout_description" />
 
         <Button
-            android:id="@+id/btneditor_cancel"
+            android:id="@+id/btn_editor_cancel"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,6 +101,28 @@
             android:text="CANCEL"
             app:layout_constraintEnd_toStartOf="@+id/btn_editor_save"
             app:layout_constraintTop_toTopOf="@+id/btn_editor_save" />
+
+        <ImageButton
+            android:id="@+id/imgbtn_editor_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="@color/design_default_color_error"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_editor_save"
+            app:srcCompat="@drawable/ic_delete" />
+
+        <ImageButton
+            android:id="@+id/imgbtn_editor_clear_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_editor_date"
+            app:layout_constraintTop_toTopOf="@+id/btn_editor_date"
+            app:srcCompat="@drawable/ic_delete_black" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

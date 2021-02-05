@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -46,23 +45,52 @@ class EditorFragment : Fragment() {
                 name = todoItem.name
                 description = todoItem.description
                 deadline = todoItem.deadline
+
+                binding.imgbtnEditorDelete.setOnClickListener {
+                    viewModel.removeTodoItem(todoItem.id)
+                    findNavController().popBackStack()
+                }
+            }
+        }
+
+
+        viewModel.newTodoItem?.let {
+            if (!it) {
+                binding.imgbtnEditorDelete.visibility = View.VISIBLE
             }
         }
 
         binding.editTextEditorName.setText(name)
         binding.editTextEditorDescription.setText(description)
-        updateDate()
+
+        updateDeadline()
+
+        binding.imgbtnEditorClearDate.setOnClickListener {
+            deadline = null
+            updateDeadline()
+        }
 
         binding.btnEditorDate.setOnClickListener {
             selectDate()
         }
 
         binding.btnEditorSave.setOnClickListener {
-            viewModel.setTodoItem(name, deadline, description)
+            setTodoItem()
+            findNavController().popBackStack()
+        }
+
+        binding.btnEditorCancel.setOnClickListener {
             findNavController().popBackStack()
         }
 
         return binding.root
+    }
+
+
+    private fun setTodoItem() {
+        name = binding.editTextEditorName.text.toString()
+        description = binding.editTextEditorDescription.text.toString()
+        viewModel.setTodoItem(name, deadline, description)
     }
 
     private fun selectDate() {
@@ -71,13 +99,23 @@ class EditorFragment : Fragment() {
 
         picker.addOnPositiveButtonClickListener { timeMillis ->
             deadline = Calendar.getInstance().apply { timeInMillis = timeMillis }
-            updateDate()
+            updateDeadline()
         }
 
         picker.show(parentFragmentManager, picker.toString())
     }
 
-    private fun updateDate() {
+    private fun updateDeadline() {
         binding.btnEditorDate.text = deadline?.asFormattedDate() ?: "SELECT"
+        setBtnClearDateVisibility()
+    }
+
+
+    private fun setBtnClearDateVisibility() {
+        if (deadline != null) {
+            binding.imgbtnEditorClearDate.visibility = View.VISIBLE
+        } else {
+            binding.imgbtnEditorClearDate.visibility = View.GONE
+        }
     }
 }

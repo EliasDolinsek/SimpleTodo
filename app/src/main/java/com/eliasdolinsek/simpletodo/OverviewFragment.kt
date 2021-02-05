@@ -19,6 +19,7 @@ import java.util.*
 class OverviewFragment : Fragment() {
 
     private lateinit var todoItemAdapter: TodoItemAdapter
+    private lateinit var viewModel: OverviewViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +30,7 @@ class OverviewFragment : Fragment() {
         val factory =
             OverviewViewModelFactory((requireActivity().application as TodoItemApplication).repository)
 
-        val viewModel = ViewModelProvider(this, factory).get(OverviewViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(OverviewViewModel::class.java)
         viewModel.loadTodoItems()
 
         todoItemAdapter =
@@ -73,7 +74,7 @@ class OverviewFragment : Fragment() {
     }
 
     private fun onCheckTodoItem(id: UUID) {
-
+        viewModel.updateDone(id)
     }
 
 }
